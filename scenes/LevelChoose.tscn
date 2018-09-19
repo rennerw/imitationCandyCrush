@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://scripts/LevelChoose.gd" type="Script" id=1]
+[ext_resource path="res://assets/files/png/splash_screen/marker_inactive.png" type="Texture" id=2]
+[ext_resource path="res://assets/files/png/splash_screen/2_stars.png" type="Texture" id=3]
+[ext_resource path="res://assets/files/png/gui/$.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 49.7661
+
+[node name="Level" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+level = 0
+
+[node name="Lock" type="Sprite" parent="."]
+
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="Stars" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( -1.22772, 35.6043 )
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Number" type="Sprite" parent="."]
+
+transform/pos = Vector2( 1.22774, -12.2773 )
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+
+visibility/visible = false
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[connection signal="input_event" from="." to="." method="_on_Level_input_event"]
+
+

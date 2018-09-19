@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://assets/files/png/splash_screen/map.png" type="Texture" id=1]
+[ext_resource path="res://scenes/LevelChoose.tscn" type="PackedScene" id=2]
+
+[node name="MainScreen" type="Node"]
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Level1" parent="Node" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 171.255, 1122.66 )
+level = 1
+
+[node name="Level2" parent="Node" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 312.283, 1065.73 )
+level = 2
+
+[node name="Level3" parent="Node" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 448.767, 1013.34 )
+level = 3
+
+
