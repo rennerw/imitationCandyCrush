@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://assets/files/png/main_game/Layer_2_Copy.png" type="Texture" id=1]
-[ext_resource path="res://assets/files/png/main_game/border.png" type="Texture" id=2]
-[ext_resource path="res://scripts/CandyMananer.gd" type="Script" id=3]
+[ext_resource path="res://assets/files/png/main_game/board.png" type="Texture" id=2]
+[ext_resource path="res://scripts/MovesBoard.gd" type="Script" id=3]
+[ext_resource path="res://assets/files/png/main_game/moves.png" type="Texture" id=4]
+[ext_resource path="res://assets/files/png/gui/Group_3.png" type="Texture" id=5]
+[ext_resource path="res://assets/files/png/gui/Group_5.png" type="Texture" id=6]
+[ext_resource path="res://assets/files/png/main_game/border.png" type="Texture" id=7]
+[ext_resource path="res://scripts/CandyMananer.gd" type="Script" id=8]
 
 [node name="Node" type="Node"]
 
@@ -26,11 +31,33 @@ centered = false
 region = true
 region_rect = Rect2( 0, 0, 1600, 460 )
 
+[node name="MovesBoard" type="Sprite" parent="."]
+
+transform/pos = Vector2( 400, 90 )
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+script/script = ExtResource( 3 )
+
+[node name="Label" type="Sprite" parent="MovesBoard"]
+
+transform/pos = Vector2( 13, -83 )
+texture = ExtResource( 4 )
+
+[node name="Number1" type="Sprite" parent="MovesBoard"]
+
+transform/pos = Vector2( -63, 30 )
+texture = ExtResource( 5 )
+
+[node name="Number2" type="Sprite" parent="MovesBoard"]
+
+transform/pos = Vector2( 60, 30 )
+texture = ExtResource( 6 )
+
 [node name="Border" type="Sprite" parent="."]
 
 transform/pos = Vector2( -8.42322, 219 )
 transform/scale = Vector2( 0.508227, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 7 )
 centered = false
 
 [node name="Board" type="ColorFrame" parent="."]
@@ -47,7 +74,8 @@ color = Color( 0.984314, 0.792157, 0.701961, 1 )
 
 [node name="Candies" type="Node" parent="."]
 
-script/script = ExtResource( 3 )
+editor/display_folded = true
+script/script = ExtResource( 8 )
 
 [node name="Timer" type="Timer" parent="Candies"]
 
@@ -56,6 +84,17 @@ wait_time = 0.46
 one_shot = true
 autostart = false
 
+[node name="Inter" type="Timer" parent="Candies"]
+
+process_mode = 1
+wait_time = 0.8
+one_shot = false
+autostart = false
+
+[connection signal="played" from="Candies" to="MovesBoard" method="_on_Candies_played"]
+
 [connection signal="timeout" from="Candies/Timer" to="Candies" method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="Candies/Inter" to="Candies" method="_on_Inter_timeout"]
 
 
